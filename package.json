@@ -3,5 +3,17 @@
   "version": "0.0.1",
   "description": "Connect to NEAR Ledger app from browser",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel --https index.html"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.3"
+  },
+  "dependencies": {
+    "@ledgerhq/hw-transport-u2f": "^4.70.0"
+  },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ]
 }
