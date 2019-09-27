@@ -38,7 +38,7 @@ export async function createClient() {
         },
         async getPublicKey(path) {
             const response = await this.transport.send(0x80, 4, 0, networkId, bip32PathToBytes(path));
-            return response;
+            return Buffer.from(response.subarray(0, -2));
         },
         async sign(path, transactionData) {
             transactionData = Buffer.from(bs58.decode(transactionData))
