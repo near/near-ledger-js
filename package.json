@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel --https index.html"
+    "start": "parcel --https demo/index.html"
   },
   "devDependencies": {
     "parcel": "^1.12.3"

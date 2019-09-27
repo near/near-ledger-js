@@ -2,11 +2,7 @@
 import "regenerator-runtime/runtime";
 
 import TransportU2F from "@ledgerhq/hw-transport-u2f";
-import { listen } from "@ledgerhq/logs";
-
 import bs58 from "bs58"
-
-listen(console.log);
 
 export async function createTransport() {
     const transport = await TransportU2F.create();
@@ -60,11 +56,3 @@ export async function createClient() {
         }
     }
 }
-
-Object.assign(window, { createTransport, createClient });
-
-createClient().then(client => window.client = client)
-
-// Examples:
-// await client.getVersion()
-// await client.getPublicKey("44'/397'/0'/0'/1'")
