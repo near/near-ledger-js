@@ -37,6 +37,7 @@ export async function createClient() {
             return `${major}.${minor}.${patch}`;
         },
         async getPublicKey(path) {
+            path = path || "44'/397'/0'/0'/1'";
             const response = await this.transport.send(0x80, 4, 0, networkId, bip32PathToBytes(path));
             return Buffer.from(response.subarray(0, -2));
         },
