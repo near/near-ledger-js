@@ -2,7 +2,6 @@
 import "regenerator-runtime/runtime";
 
 import TransportU2F from "@ledgerhq/hw-transport-u2f";
-import bs58 from "bs58"
 
 export async function createTransport() {
     const transport = await TransportU2F.create();
@@ -42,7 +41,7 @@ export async function createClient() {
             return Buffer.from(response.subarray(0, -2));
         },
         async sign(path, transactionData) {
-            transactionData = Buffer.from(bs58.decode(transactionData))
+            transactionData = Buffer.from(transactionData);
             // 128 - 5 service bytes
             const CHUNK_SIZE = 123
             const allData = Buffer.concat([bip32PathToBytes(path), transactionData]);
