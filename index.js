@@ -26,6 +26,7 @@ function bip32PathToBytes(path) {
 
 const networkId = 'W'.charCodeAt(0);
 
+const DEFAULT_PATH = "44'/397'/0'/0'/1'";
 export async function createClient() {
     const transport = await createTransport();
     return {
@@ -36,11 +37,12 @@ export async function createClient() {
             return `${major}.${minor}.${patch}`;
         },
         async getPublicKey(path) {
-            path = path || "44'/397'/0'/0'/1'";
+            path = path || DEFAULT_PATH;
             const response = await this.transport.send(0x80, 4, 0, networkId, bip32PathToBytes(path));
             return Buffer.from(response.subarray(0, -2));
         },
-        async sign(path, transactionData) {
+        async sign(transactionData, path) {
+            path = path || DEFAULT_PATH;
             transactionData = Buffer.from(transactionData);
             // 128 - 5 service bytes
             const CHUNK_SIZE = 123
