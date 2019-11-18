@@ -688,37 +688,37 @@
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.3.tgz#f060bf6eaafae4d56a7dac618980838b0696e2ab"
   integrity sha512-FmuxfCuolpLl0AnQ2NHSzoUKWEJDFl63qXjzdoWBVyFCXzMGm1spBzk7LeHNoVCiWCF7mRVms9e6jEV9+MoPbg==
 
-"@ledgerhq/devices@^4.73.4":
-  version "4.73.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/devices/-/devices-4.73.4.tgz#0a1866fd1f10e2afc57c5f002f60d52ad5e6bb99"
-  integrity sha512-oEhd1UlbkdRFe5ZQCr8aXZ4Z/uFvrTsIhXv6bDlqA0sR2VYZRqQPR4C0xLdcDo3NG88fP+6Xfi6wq3wBbT5n3A==
+"@ledgerhq/devices@^4.74.2":
+  version "4.74.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/devices/-/devices-4.74.2.tgz#f7042c31b491ba3d9fad506ec6519674fd9c7474"
+  integrity sha512-EUA2S28DWWKvUs9XOIpdNZMU5HGyXIZU2nVr6Rr0yYvYTEuItuBSvtfot17rSoyYLwClOoNPHMqXAvrCmr/6hg==
   dependencies:
-    "@ledgerhq/errors" "^4.73.4"
+    "@ledgerhq/errors" "^4.74.2"
     "@ledgerhq/logs" "^4.72.0"
     rxjs "^6.5.3"
 
-"@ledgerhq/errors@^4.73.4":
-  version "4.73.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-4.73.4.tgz#df4705d11350f252c0f0c202e88a32723f409484"
-  integrity sha512-5Wz48jm0NozGkipPcYRAAFcwm50xLhCWSpmP96Fs7v8BtM72E1AtqOud5SCyTKS6OP10mPuDB1459b7FGFoBcw==
+"@ledgerhq/errors@^4.74.2":
+  version "4.74.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-4.74.2.tgz#586cfaed135354e94afda4e7ab2334abcdce187a"
+  integrity sha512-Y42pWQlxP0cD5av/UKXM0PXCL4knylP4lZ0BFMPDDqU8VTOWKhj92sWJJgb4beqU19i7uuEqqAeYbMMt1ubwpg==
 
 "@ledgerhq/hw-transport-u2f@^4.70.0":
-  version "4.73.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-u2f/-/hw-transport-u2f-4.73.4.tgz#d18e8c4fa9289fd078441397ba1d3a3ab3b608e2"
-  integrity sha512-GSi/obZ7p1H5orTed4o3HhCeLV+odbweinY5dSOcY4WWL/YmrZfYUZQ+eFTZrnNVwv1EGrLeBaSEZcdIXdIFXg==
+  version "4.74.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-u2f/-/hw-transport-u2f-4.74.2.tgz#20946865204113eb4a586b2ac8d721730ee35bad"
+  integrity sha512-islCIL1HTnmSEj6V9U/f9TT9HHe9sviDuN3Ra0zK65cGaWqQa3Ni6wQil2wl7vNrEN7inwqAq5QOf3LzEFTOtg==
   dependencies:
-    "@ledgerhq/errors" "^4.73.4"
-    "@ledgerhq/hw-transport" "^4.73.4"
+    "@ledgerhq/errors" "^4.74.2"
+    "@ledgerhq/hw-transport" "^4.74.2"
     "@ledgerhq/logs" "^4.72.0"
     u2f-api "0.2.7"
 
-"@ledgerhq/hw-transport@^4.73.4":
-  version "4.73.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-4.73.4.tgz#e3b58eebbc99b003406838660b7d17611e02ebc7"
-  integrity sha512-UAw7v+le8pyEz+q2sA0TVS9WGmifKqGxuwcYz+hN1quJkfTmivvcHCuSF5t7BDCuuuRNoCT36YjnIzf363Tf2w==
+"@ledgerhq/hw-transport@^4.74.2":
+  version "4.74.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-4.74.2.tgz#dc4874b77616b63419cee5eed746dc23183ab6ce"
+  integrity sha512-83SiHd7wuif/epq58n9kPFhqr/1zv9a13nDYFLinaUGvRrx5jGFvCq9HiS/WIPOeIHsnuStpqKQbpUDvlRlHKg==
   dependencies:
-    "@ledgerhq/devices" "^4.73.4"
-    "@ledgerhq/errors" "^4.73.4"
+    "@ledgerhq/devices" "^4.74.2"
+    "@ledgerhq/errors" "^4.74.2"
     events "^3.0.0"
 
 "@ledgerhq/logs@^4.70.0", "@ledgerhq/logs@^4.72.0":
