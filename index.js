@@ -27,8 +27,10 @@ function bip32PathToBytes(path) {
 const networkId = 'W'.charCodeAt(0);
 
 const DEFAULT_PATH = "44'/397'/0'/0'/1'";
-export async function createClient() {
-    const transport = await createTransport();
+export async function createClient(transport) {
+    if (!transport) {
+        transport = await createTransport();
+    }
     return {
         transport,
         async getVersion() {
