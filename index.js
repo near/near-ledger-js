@@ -1,13 +1,5 @@
 
-import "regenerator-runtime/runtime";
-
-import TransportU2F from "@ledgerhq/hw-transport-u2f";
-
-export async function createTransport() {
-    const transport = await TransportU2F.create();
-    transport.setScrambleKey("NEAR");
-    return transport;
-}
+require("regenerator-runtime/runtime");
 
 function bip32PathToBytes(path) {
     const parts = path.split('/');
@@ -27,10 +19,8 @@ function bip32PathToBytes(path) {
 const networkId = 'W'.charCodeAt(0);
 
 const DEFAULT_PATH = "44'/397'/0'/0'/1'";
-export async function createClient(transport) {
-    if (!transport) {
-        transport = await createTransport();
-    }
+ 
+module.exports.createClient = async function createClient(transport) {
     return {
         transport,
         async getVersion() {
