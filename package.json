@@ -8,7 +8,10 @@
     "start": "parcel --https demo/index.html"
   },
   "devDependencies": {
-    "parcel": "^1.12.3"
+    "@ledgerhq/hw-transport-u2f": "^5.15.0",
+    "@ledgerhq/logs": "^5.15.0",
+    "parcel": "^1.12.3",
+    "regenerator-runtime": "^0.13.5"
   },
   "dependencies": {
     "bs58": "^4.0.1"
