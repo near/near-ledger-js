@@ -1,6 +1,4 @@
 
-require("regenerator-runtime/runtime");
-
 function bip32PathToBytes(path) {
     const parts = path.split('/');
     return Buffer.concat(
