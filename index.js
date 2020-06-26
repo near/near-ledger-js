@@ -32,6 +32,11 @@ module.exports.createClient = async function createClient(transport) {
             return Buffer.from(response.subarray(0, -2));
         },
         async sign(transactionData, path) {
+            // NOTE: getVersion call allows to reset state to avoid starting from partially filled buffer
+            const version = await this.getVersion();
+            console.info('Ledger app version:', version);
+            // TODO: Assert compatible versions
+
             path = path || DEFAULT_PATH;
             transactionData = Buffer.from(transactionData);
             // 128 - 5 service bytes
