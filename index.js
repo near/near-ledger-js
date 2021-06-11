@@ -3,7 +3,7 @@ const { default: LedgerTransportWebUsb } = require('@ledgerhq/hw-transport-webus
 const { default: LedgerTransportWebHid } = require('@ledgerhq/hw-transport-webhid');
 const platform = require('platform');
 
-const ENABLE_DEBUG_LOGGING = false;
+const ENABLE_DEBUG_LOGGING = true;
 const debugLog = (...args) => {
     ENABLE_DEBUG_LOGGING && console.log(...args)
 };
