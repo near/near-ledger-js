@@ -2,6 +2,22 @@
 
 A JavaScript library for communication with [Ledger](https://www.ledger.com/) Hardware Wallet.
 
+# Example usage
+```javascript
+  import { createClient, getSupportedTransport } from "near-ledger-js";
+  
+  const transport = await getSupportedTransport();
+  transport.setScrambleKey("NEAR");
+  
+  transport.on('disconnect', () => {...});
+```
+
+In an onClick handler:
+```javascript
+  const client = await createClient(transport);
+  // If no error thrown, ledger is connected
+```
+
 # How to run demo project
 1. `yarn` to install dependencies
 2. `yarn start` to start local server with Parcel
