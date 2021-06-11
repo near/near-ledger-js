@@ -3,7 +3,7 @@ const { default: LedgerTransportWebUsb } = require('@ledgerhq/hw-transport-webus
 const { default: LedgerTransportWebHid } = require('@ledgerhq/hw-transport-webhid');
 const platform = require('platform');
 
-const ENABLE_DEBUG_LOGGING = true;
+let ENABLE_DEBUG_LOGGING = false;
 const debugLog = (...args) => {
     ENABLE_DEBUG_LOGGING && console.log(...args)
 };
@@ -37,6 +37,7 @@ async function isWebHidSupported() {
     return LedgerTransportWebHid.isSupported();
 }
 
+module.exports.setDebugLogging = (value) => ENABLE_DEBUG_LOGGING = value;
 module.exports.getSupportedTransport = async function getSupportedTransports() {
     let transport;
 
@@ -58,7 +59,7 @@ module.exports.getSupportedTransport = async function getSupportedTransports() {
         }
     } catch (hwTransportError) {
         try {
-            console.warn('failed to initialize transport!', { hwTransportError })
+            console.warn('failed to initialize transport! Will try U2F fallback...', { hwTransportError })
             // fallback to U2F in case of errors detecting or creating preferred transports
             transport = await LedgerTransportU2F.create();
         } catch (u2fTransportError) {

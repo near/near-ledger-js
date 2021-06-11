@@ -18,6 +18,8 @@ In an onClick handler:
   // If no error thrown, ledger is connected
 ```
 
+To see debug logging for `getSupportedTransport()`, import `setDebugLogging()` and call `setDebugLogging(true)` before using the package.
+
 # How to run demo project
 1. `yarn` to install dependencies
 2. `yarn start` to start local server with Parcel

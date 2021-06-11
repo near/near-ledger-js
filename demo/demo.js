@@ -3,8 +3,9 @@ import "regenerator-runtime/runtime";
 import { listen } from "@ledgerhq/logs";
 import bs58 from "bs58";
 
-import { createClient, getSupportedTransport } from "../";
+import { createClient, getSupportedTransport, setDebugLogging } from "../";
 
+setDebugLogging(true);
 listen(console.log);
 
 window.ledgerConnected = false;
