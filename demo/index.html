@@ -2,6 +2,7 @@
 <body>
 <script src="./demo.js"></script>
 <script>
+    window.nearLedger = new window.NEAR.LedgerManager();
     window.onload = () => window.nearLedger.setLedgerAvailableStatus(false);
 </script>
 <h1>Examples</h1>

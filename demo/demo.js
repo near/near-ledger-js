@@ -69,4 +69,4 @@ class LedgerManager {
     }
 }
 
-window.nearLedger = new LedgerManager();
+window.NEAR = { LedgerManager };
