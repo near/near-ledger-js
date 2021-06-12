@@ -8,6 +8,8 @@ import { createClient, getSupportedTransport, setDebugLogging } from "../";
 setDebugLogging(true);
 listen(console.log);
 
+window.Buffer = Buffer;
+
 class LedgerManager {
     constructor() {
         this.bs58 = bs58;
