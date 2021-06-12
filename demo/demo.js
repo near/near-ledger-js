@@ -8,34 +8,56 @@ import { createClient, getSupportedTransport, setDebugLogging } from "../";
 setDebugLogging(true);
 listen(console.log);
 
-window.ledgerConnected = false;
-
-async function createTransport() {
-    const transport = await getSupportedTransport();
-    transport.setScrambleKey("NEAR");
-    return transport;
-}
-
-function updateLedgerConnectedBanner() {
-    document.getElementById('ledgerStatus').innerHTML = window.ledgerConnected ? "Ledger Connected" : "Ledger Not Connected"
-}
-
 Object.assign(window, {
-    initialize: async function initialize() {
-        const transport = await createTransport();
-        transport.on('disconnect', (...args) => {
-            console.log('Ledger disconnected', ...args);
-            window.ledgerConnected = false;
-            updateLedgerConnectedBanner()
-        });
+    nearLedger: {
+        available: false,
+        disconnectHandler: null,
 
-        const client = await createClient(transport);
+        handleDisconnect: function handleDisconnect(reason) {
+            console.log('ledger disconnected', reason);
+            this.setLedgerAvailableStatus(false);
+        },
+        setLedgerAvailableStatus: function setLedgerAvailableStatus(status) {
+            this.available = status;
 
-        Object.assign(window, { transport, client, ledgerConnected: true });
-        updateLedgerConnectedBanner()
-    },
-    createClient,
-    createTransport,
-    bs58,
-    Buffer
+            const statusMessage = this.available ? "Ledger client available" : "Ledger client not available";
+            document.getElementById('ledgerStatus').innerHTML = statusMessage;
+            console.log(statusMessage);
+        },
+        initialize: async function initialize() {
+            if (this.transport) {
+                if (this.transport.close) {
+                    console.log('Closing transport');
+                    try {
+                        this.transport.close && this.transport.close();
+                    } catch (e) {
+                        console.warn('Failed to close existing transport', e);
+                    } finally {
+                        this.transport.off('disconnect', this.disconnectHandler);
+                    }
+                }
+
+                delete this.transport;
+                delete this.client;
+            }
+
+            this.setLedgerAvailableStatus(false);
+
+            this.transport = await this.createTransport();
+            this.disconnectHandler = (...args) => this.handleDisconnect(...args)
+            this.transport.on('disconnect', this.disconnectHandler);
+
+            this.client = await this.createClient(this.transport);
+
+            this.setLedgerAvailableStatus(true);
+        },
+        createClient,
+        createTransport: async function createTransport() {
+            const transport = await getSupportedTransport();
+            transport.setScrambleKey("NEAR");
+            return transport;
+        },
+        bs58,
+        Buffer
+    }
 });

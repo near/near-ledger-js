@@ -15,7 +15,7 @@ A JavaScript library for communication with [Ledger](https://www.ledger.com/) Ha
 In an onClick handler:
 ```javascript
   const client = await createClient(transport);
-  // If no error thrown, ledger is connected
+  // If no error thrown, ledger is available. NOTE: U2F transport will still get here even if device is not present 
 ```
 
 To see debug logging for `getSupportedTransport()`, import `setDebugLogging()` and call `setDebugLogging(true)` before using the package.
