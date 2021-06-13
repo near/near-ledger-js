@@ -53,10 +53,10 @@ async function createSupportedTransport() {
         // WebHID is still supported by latest Chrome, so try that first
         ...(supportWebHid && [{ name: 'WebHID', createTransport: () => LedgerTransportWebHid.create() }]),
 
-        ...(supportWebHid && [{ name: 'WebUSB', createTransport: () => LedgerTransportWebUsb.create() }]),
+        ...(supportWebUsb && [{ name: 'WebUSB', createTransport: () => LedgerTransportWebUsb.create() }]),
 
         // Firefox/Mozilla intend to not support WebHID or WebUSB
-        ...(supportWebHid && [{ name: 'U2F', createTransport: () => LedgerTransportU2F.create() }]),
+        ...(supportU2f && [{ name: 'U2F', createTransport: () => LedgerTransportU2F.create() }]),
     ]
 
     let transport = null;
@@ -82,24 +82,16 @@ async function createSupportedTransport() {
 }
 
 module.exports.setDebugLogging = (value) => ENABLE_DEBUG_LOGGING = value;
-module.exports.getSupportedTransport = async function getSupportedTransports() {
-    try {
-        const [errors, transport] = await createSupportedTransport();
+module.exports.getSupportedTransport = async
 
-        if (errors && !transport) {
-            console.error('Failed to initialize ledger transport', { errors });
-            throw errors[errors.length - 1];
-        }
+function getSupportedTransports() {
+    const [errors, transport] = await createSupportedTransport();
 
-        debugLog('Ledger transport created!', transport);
-        return transport;
-    } catch (hwTransportError) {
-        if (hwTransportError.name === 'TransportOpenUserCancelled') {
-            // If the user clicked the `cancel` button, we should not try to fall back to u2f
-            throw hwTransportError;
-        }
-        throw hwTransportError;
+    if (errors && !transport) {
+        console.error('Failed to initialize ledger transport', { errors });
+        throw errors[errors.length - 1];
     }
 
-
+    debugLog('Ledger transport created!', transport);
+    return transport;
 }
