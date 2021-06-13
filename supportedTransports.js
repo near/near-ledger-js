@@ -82,9 +82,7 @@ async function createSupportedTransport() {
 }
 
 module.exports.setDebugLogging = (value) => ENABLE_DEBUG_LOGGING = value;
-module.exports.getSupportedTransport = async
-
-function getSupportedTransports() {
+module.exports.getSupportedTransport = async function getSupportedTransports() {
     const [errors, transport] = await createSupportedTransport();
 
     if (errors && !transport) {
@@ -92,6 +90,7 @@ function getSupportedTransports() {
         throw errors[errors.length - 1];
     }
 
-    debugLog('Ledger transport created!', transport);
+    if (transport) { debugLog('Ledger transport created!', transport); }
+
     return transport;
 }
