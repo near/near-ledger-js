@@ -8,13 +8,11 @@ import { createClient, getSupportedTransport, setDebugLogging } from "../";
 setDebugLogging(true);
 listen(console.log);
 
-window.Buffer = Buffer;
+window.Buffer = Buffer; // Exists due to `bs58` import
 
 class LedgerManager {
     constructor() {
         this.bs58 = bs58;
-        this.Buffer = Buffer; // Exists due to `bs58` import
-
         this.available = false;
         this.disconnectHandler = (...args) => this.handleDisconnect(...args)
     }
