@@ -1,6 +1,6 @@
 {
   "name": "near-ledger-js",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Connect to NEAR Ledger app from browser",
   "main": "index.js",
   "license": "MIT",
