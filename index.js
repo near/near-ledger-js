@@ -1,3 +1,7 @@
+const { getSupportedTransport, setDebugLogging } = require('./supportedTransports');
+
+module.exports.getSupportedTransport = getSupportedTransport;
+module.exports.setDebugLogging = setDebugLogging;
 
 function bip32PathToBytes(path) {
     const parts = path.split('/');
@@ -17,7 +21,6 @@ function bip32PathToBytes(path) {
 const networkId = 'W'.charCodeAt(0);
 
 const DEFAULT_PATH = "44'/397'/0'/0'/1'";
- 
 module.exports.createClient = async function createClient(transport) {
     return {
         transport,
