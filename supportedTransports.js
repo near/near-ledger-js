@@ -24,7 +24,7 @@ async function isWebHidSupported() {
 }
 
 async function isU2fSupported() {
-    return LedgerTransportWebHid.isSupported()
+    return LedgerTransportU2F.isSupported()
         .catch(() => false);
 }
 
