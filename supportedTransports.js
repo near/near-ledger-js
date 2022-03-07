@@ -24,7 +24,7 @@ async function isWebHidSupported() {
 }
 
 async function isU2fSupported() {
-    return LedgerTransportWebHid.isSupported()
+    return LedgerTransportU2F.isSupported()
         .catch(() => false);
 }
 
@@ -51,12 +51,12 @@ async function createSupportedTransport() {
     // We will try each transport we think is supported in the current environment, in order of this array
     const supportedTransports = [
         // WebHID is still supported by latest Chrome, so try that first
-        ...(supportWebHid && [{ name: 'WebHID', createTransport: () => LedgerTransportWebHid.create() }]),
+        ...(supportWebHid ? [{ name: 'WebHID', createTransport: () => LedgerTransportWebHid.create() }] : []),
 
-        ...(supportWebUsb && [{ name: 'WebUSB', createTransport: () => LedgerTransportWebUsb.create() }]),
+        ...(supportWebUsb ? [{ name: 'WebUSB', createTransport: () => LedgerTransportWebUsb.create() }] : []),
 
         // Firefox/Mozilla intend to not support WebHID or WebUSB
-        ...(supportU2f && [{ name: 'U2F', createTransport: () => LedgerTransportU2F.create() }]),
+        ...(supportU2f ? [{ name: 'U2F', createTransport: () => LedgerTransportU2F.create() }] : []),
     ]
 
     let transport = null;
