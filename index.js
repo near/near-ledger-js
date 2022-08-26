@@ -29,10 +29,15 @@ module.exports.createClient = async function createClient(transport) {
             const [major, minor, patch] = Array.from(response);
             return `${major}.${minor}.${patch}`;
         },
-        async getPublicKey(path) {
+        async getPublicKey(path, verify) {
             path = path || DEFAULT_PATH;
-            const response = await this.transport.send(0x80, 4, 0, networkId, bip32PathToBytes(path));
+            const response = await this.transport.send(0x80, 4, verify ? 0 : 1, networkId, bip32PathToBytes(path));
             return Buffer.from(response.subarray(0, -2));
+        },
+        async getAddress(path) {
+            path = path || DEFAULT_PATH;
+            const response = await this.transport.send(0x80, 5, 0, networkId, bip32PathToBytes(path));
+            return Buffer.from(response.subarray(0, -2)).toString('hex');
         },
         async sign(transactionData, path) {
             // NOTE: getVersion call allows to reset state to avoid starting from partially filled buffer
