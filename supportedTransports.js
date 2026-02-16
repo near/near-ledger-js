@@ -1,6 +1,7 @@
 const { default: LedgerTransportU2F } = require('@ledgerhq/hw-transport-u2f');
 const { default: LedgerTransportWebUsb } = require('@ledgerhq/hw-transport-webusb');
 const { default: LedgerTransportWebHid } = require('@ledgerhq/hw-transport-webhid');
+const { default: LedgerTransportWebBle } = require("@ledgerhq/hw-transport-web-ble");
 const platform = require('platform');
 
 let ENABLE_DEBUG_LOGGING = false;
@@ -28,20 +29,26 @@ async function isU2fSupported() {
         .catch(() => false);
 }
 
+async function isBleSupported() {
+    return LedgerTransportWebBle.isSupported().catch(() => false);
+}
+
 async function createSupportedTransport() {
     const [
         supportWebHid,
         supportWebUsb,
-        supportU2f
+        supportU2f,
+        supportWebBle,
     ] = await Promise.all([
         isWebHidSupported(),
         isWebUsbSupported(),
-        isU2fSupported()
+        isU2fSupported(),
+        isBleSupported(),
     ]);
 
-    debugLog("Transports supported:", { supportWebHid, supportWebUsb, supportU2f });
+    debugLog("Transports supported:", { supportWebHid, supportWebUsb, supportU2f, supportWebBle });
 
-    if (!supportWebHid && !supportWebUsb && !supportU2f) {
+    if (!supportWebHid && !supportWebUsb && !supportU2f && !supportWebBle) {
         const err = new Error('No transports appear to be supported.');
         err.name = 'NoTransportSupported';
         throw err;
@@ -50,7 +57,10 @@ async function createSupportedTransport() {
     // Sometimes transports return true for `isSupported()`, but are proven broken when attempting to `create()` them.
     // We will try each transport we think is supported in the current environment, in order of this array
     const supportedTransports = [
-        // WebHID is still supported by latest Chrome, so try that first
+        // Webble supported by latest Chrome first
+        ...(supportWebBle ? [{ name: 'WebBle', createTransport: () => LedgerTransportWebBle.create() }] : []),
+
+        // WebHID is still supported by latest Chrome
         ...(supportWebHid ? [{ name: 'WebHID', createTransport: () => LedgerTransportWebHid.create() }] : []),
 
         ...(supportWebUsb ? [{ name: 'WebUSB', createTransport: () => LedgerTransportWebUsb.create() }] : []),

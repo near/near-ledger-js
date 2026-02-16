@@ -9,18 +9,30 @@
     "test": "parcel build demo/index.html"
   },
   "devDependencies": {
-    "@ledgerhq/logs": "^5.15.0",
+    "@ledgerhq/logs": "^6.12.0",
+    "buffer": "^6.0.0",
     "parcel": "^1.12.3",
+    "process": "^0.11.10",
     "regenerator-runtime": "^0.13.5"
   },
   "dependencies": {
+    "@ledgerhq/devices": "^8.3.0",
     "@ledgerhq/hw-transport-u2f": "^5.36.0-deprecated",
-    "@ledgerhq/hw-transport-webhid": "^5.51.1",
-    "@ledgerhq/hw-transport-webusb": "^5.53.1",
+    "@ledgerhq/hw-transport-web-ble": "^6.28.6",
+    "@ledgerhq/hw-transport-webhid": "^6.28.6",
+    "@ledgerhq/hw-transport-webusb": "^6.28.6",
     "bs58": "^4.0.1",
     "platform": "^1.3.6"
   },
+  "resolutions": {
+    "@babel/preset-env": "7.13.8"
+  },
   "browserslist": [
     "last 1 Chrome versions"
-  ]
+  ],
+  "alias": {
+    "@ledgerhq/devices/hid-framing": "@ledgerhq/devices/lib/hid-framing",
+    "@ledgerhq/devices/ble/receiveAPDU": "@ledgerhq/devices/lib/ble/receiveAPDU",
+    "@ledgerhq/devices/ble/sendAPDU": "@ledgerhq/devices/lib/ble/sendAPDU"
+  }
 }
